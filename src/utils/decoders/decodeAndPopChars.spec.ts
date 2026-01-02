@@ -9,7 +9,7 @@ describe("decodeAndPopChars", () => {
       intEncoder.encode8Bit(255), // Padding
       intEncoder.encode8Bit(4), // Padding
       Buffer.from(stringEncoder.encodeChars("IN")), // Command
-      intEncoder.encode(2).reverse(), // Protocol Version no
+      intEncoder.encode(2), // Protocol Version no
       intEncoder.encode(124), // Random initiator token
       intEncoder.encode(1003), // SSRC - self identifier
       Buffer.from(stringEncoder.encodeChars("ZRXX")),

@@ -3,16 +3,16 @@ import { stringToPaddedBuffer, textEncoder } from "./stringToPaddedBuffer";
 
 export const intEncoder = {
   encode: function encode(number: number) {
-    return new Uint8Array(Uint32Array.of(number).buffer);
+    return new Uint8Array(Uint32Array.of(number).buffer).reverse();
   },
   encode8Bit: function encode(number: number) {
-    return new Uint8Array(Uint8Array.of(number).buffer);
+    return new Uint8Array(Uint8Array.of(number).buffer).reverse();
   },
 };
 
 export const floatEncoder = {
   encode: function encode(number: number) {
-    return new Uint8Array(Float32Array.of(number).buffer);
+    return new Uint8Array(Float32Array.of(number).buffer).reverse();
   },
 };
 

@@ -1,6 +1,4 @@
-import { bufferEncoder } from "../encoders";
-import { floatToBuffer } from "../encoders/floatToBuffer";
-import { intToBuffer } from "../encoders/intToBuffer";
+import { bufferEncoder, floatEncoder, intEncoder } from "../encoders";
 import {
   stringToPaddedBuffer,
   textEncoder,
@@ -15,8 +13,8 @@ describe("decodeAndPopBlob", () => {
   it("encodes and decodes", () => {
     const input = bufferEncoder.encodePadded(
       Buffer.concat([
-        intToBuffer(12134),
-        floatToBuffer(1234.1234),
+        intEncoder.encode(12134),
+        floatEncoder.encode(1234.1234),
         stringToPaddedBuffer("athing"),
       ])
     );

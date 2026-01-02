@@ -1,4 +1,4 @@
-import { intToBuffer } from "../encoders/intToBuffer";
+import { intEncoder } from ".";
 import { textEncoder } from "./stringToPaddedBuffer";
 
 const BUFFER_PADDING = {
@@ -29,5 +29,5 @@ export function bufferToPaddedBuffer(buffer: Uint8Array<ArrayBuffer>) {
   const paddedBuffer = Buffer.concat([buffer, BUFFER_PADDING[paddingNo]]);
   const size = paddedBuffer.length / 4;
 
-  return Buffer.concat([intToBuffer(size), paddedBuffer]);
+  return Buffer.concat([intEncoder.encode(size), paddedBuffer]);
 }
