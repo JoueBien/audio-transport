@@ -7,10 +7,10 @@
     "typecheck": "tsc --noEmit"
   },
   "author": "JoueBien",
-  "description": "A typescript library for sending messages over various network protocols.",
+  "description": "A typescript library for sending audio control messages over various network protocols.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JoueBien/osc-toy.git"
+    "url": "git+https://github.com/JoueBien/audio-transport.git"
   },
   "license": "MIT NON-AI",
   "dependencies": {
@@ -24,7 +24,7 @@
     "typescript": "5.7.3"
   },
   "bugs": {
-    "url": "https://github.com/JoueBien/osc-toy/issues"
+    "url": "https://github.com/JoueBien/audio-transport/issues"
   },
-  "homepage": "https://github.com/JoueBien/osc-toy#readme"
+  "homepage": "https://github.com/JoueBien/audio-transport#readme"
 }
