@@ -1,3 +1,4 @@
+import { Failure } from "fail-up";
 import { MockUdpServer, mockUdpServer } from "./mocks/mockUdpServer";
 import { UdpTransport } from "./UdpTransport";
 import { decodeAndPopPaddedString } from "./utils/decoders/decodeAndPopPaddedString";
@@ -79,14 +80,18 @@ describe("UdpTransport", () => {
     await client.connect();
     const sendMessage = stringEncoder.encodePadded("/message");
 
-    const response = serverPtr.waitForSpecificMessageOnServer(
-      Buffer.from(stringEncoder.encodePadded("/message"))
-    );
+    const response = serverPtr.waitForSpecificMessageOnServer({
+      matches: Buffer.from(stringEncoder.encodePadded("/message")),
+    });
     await client.send(sendMessage);
 
     const messageReceived = await response;
 
     client.cleanUpController.abort();
+
+    if (messageReceived instanceof Failure) {
+      throw new Error("returned Failure not message");
+    }
 
     expect(
       decodeAndPopPaddedString(Uint8Array.from(messageReceived.msg)).str
@@ -94,9 +99,9 @@ describe("UdpTransport", () => {
   });
 
   it("responds can send message to remote connections", async () => {
-    const response = serverPtr.waitForSpecificMessageOnServer(
-      Buffer.from(stringEncoder.encodePadded("/message"))
-    );
+    const response = serverPtr.waitForSpecificMessageOnServer({
+      matches: Buffer.from(stringEncoder.encodePadded("/message")),
+    });
 
     await serverPtr.respond({
       msg: stringEncoder.encodePadded("/message"),
@@ -105,6 +110,11 @@ describe("UdpTransport", () => {
     });
 
     const messageReceived = await response;
+
+    if (messageReceived instanceof Failure) {
+      throw new Error("returned Failure not message");
+    }
+
     expect(
       decodeAndPopPaddedString(Uint8Array.from(messageReceived.msg)).str
     ).toBe("/message");
