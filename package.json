@@ -1,0 +1,30 @@
+{
+  "name": "@joue-bien/audio-transport",
+  "version": "0.0.1",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "jest --collect-coverage",
+    "typecheck": "tsc --noEmit"
+  },
+  "author": "JoueBien",
+  "description": "A typescript library for sending messages over various network protocols.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoueBien/osc-toy.git"
+  },
+  "license": "MIT NON-AI",
+  "dependencies": {
+    "fail-up": "1.0.1"
+  },
+  "devDependencies": {
+    "@types/jest": "29.5.14",
+    "@types/node": "22.13.5",
+    "jest": "29.7.0",
+    "ts-jest": "29.2.5",
+    "typescript": "5.7.3"
+  },
+  "bugs": {
+    "url": "https://github.com/JoueBien/osc-toy/issues"
+  },
+  "homepage": "https://github.com/JoueBien/osc-toy#readme"
+}
