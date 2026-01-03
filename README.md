@@ -6,10 +6,10 @@ The library is primarily focused on providing a base UDP transport and utilities
 
 # Further reading
 
-- [dgram](https://nodejs.org/api/dgram.html) - Node's socket Documentation
-- [OSC 1.1](https://opensoundcontrol.stanford.edu/spec-1_1.html) - Open Sound Control documentation
+- [dgram](https://nodejs.org/api/dgram.html) - Node's socket Documentation.
+- [OSC 1.1](https://opensoundcontrol.stanford.edu/spec-1_1.html) - Open Sound Control documentation.
 - [Network Midi](https://developer.apple.com/library/archive/documentation/Audio/Conceptual/MIDINetworkDriverProtocol/MIDI/MIDI.html#//apple_ref/doc/uid/TP40017273-CH2-DontLinkElementID_8) - Apples MIDI network driver protocol.
-- [Fail Up](https://www.npmjs.com/package/fail-up) - The error handling library
+- [Fail Up](https://www.npmjs.com/package/fail-up) - The error handling library.
 
 # Install
 
@@ -86,7 +86,7 @@ Both the server and client can listen for messages.
 
 ### On message
 
-To add a function that is called when any message is received `onMessage` can be used.
+`onMessage` is used to add function that is called when any message is received.
 
 ```typescript
 const cleanUp = transport.onMessage((msg, rinfo) => {
@@ -99,7 +99,7 @@ cleanUp();
 
 ### On a single message
 
-To add a function that is called when the next message is received `onOnceMessage` can be used.
+`onOnceMessage` is used to add function that is called when the next message is received.
 
 ```typescript
 const cleanUp = transport.onOnceMessage((msg, rinfo) => {
@@ -146,9 +146,9 @@ To stop listeners and to release the response/remote ports you need to call abor
 transport.cleanUpController.abort();
 ```
 
-Once the UDP transport has been aborted the transport is done and ready to be trash collected. If you want to re-establish a connection or change/update a connection you must create new instances.
+Once the UDP transport has been aborted the transport is done and ready to be trash collected. If you want to re-establish a connection or change/update a connection you must create a new instance.
 
-If you try to add a new listener or send a message with an aborted transport an error will be returned instead.
+If you try to add a new message listener or send a message with an aborted transport an error will be returned instead.
 
 # Utilities
 
@@ -263,10 +263,7 @@ A mock is included to help with the writing of tests.
 A good example can be found in this packages `src/UdpTransport.spec.ts` file.
 
 ```typescript
-import {
-  mockUdpServer,
-  type MockUdpServer
-} from "@joue-bien/audio-transport";
+import { mockUdpServer, type MockUdpServer } from "@joue-bien/audio-transport";
 
 let serverPtr: MockUdpServer;
 
@@ -279,7 +276,7 @@ describe("UdpTransport", () => {
     // Make sure to clean up, otherwise your test will leak & leave sockets open.
     serverPtr.controller.abort();
   });
-};
+});
 ```
 
 # Error handling

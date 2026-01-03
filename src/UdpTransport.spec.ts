@@ -103,6 +103,7 @@ describe("UdpTransport", () => {
       matches: Buffer.from(stringEncoder.encodePadded("/message")),
     });
 
+    // Send message to self
     await serverPtr.respond({
       msg: stringEncoder.encodePadded("/message"),
       remoteAddress: "localhost",

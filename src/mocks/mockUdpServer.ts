@@ -58,9 +58,9 @@ export async function mockUdpServer(params?: {
       /** Set a custom wait time for a message in milliseconds.
        * @default 500
        */
-      ms?: number;
+      exitMs?: number;
     }) => {
-      const { ms } = params;
+      const { exitMs } = params;
       const rejectController = new AbortController();
       let cleanUp = () => {};
 
@@ -85,7 +85,7 @@ export async function mockUdpServer(params?: {
         cleanUp = server.onMessage(callback);
 
         // Reject if we do not get a message.
-        delay({ ms: ms || 500, cancelOnController: rejectController }).then(
+        delay({ ms: exitMs || 500, cancelOnController: rejectController }).then(
           () => {
             cleanUp();
             resolve(
@@ -102,7 +102,7 @@ export async function mockUdpServer(params?: {
     },
 
     /**
-     *  Wait for a specific message on that matches a buffer.
+     * Wait for a specific message on that matches a buffer.
      * Will return an error if does not get a message within 500 milliseconds.
      */
     waitForSpecificMessageOnServer: (params: {
@@ -110,9 +110,9 @@ export async function mockUdpServer(params?: {
       /** Set a custom wait time for a message in milliseconds.
        * @default 500
        */
-      ms?: number;
+      exitMs?: number;
     }) => {
-      const { ms, matches } = params;
+      const { exitMs, matches } = params;
       const rejectController = new AbortController();
       let cleanUp = () => {};
 
@@ -139,7 +139,7 @@ export async function mockUdpServer(params?: {
         cleanUp = server.onMessage(callback);
 
         // Reject if we do not get a message.
-        delay({ ms: ms || 500, cancelOnController: rejectController }).then(
+        delay({ ms: exitMs || 500, cancelOnController: rejectController }).then(
           () => {
             cleanUp();
             resolve(

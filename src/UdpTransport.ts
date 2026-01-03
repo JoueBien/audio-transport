@@ -181,7 +181,6 @@ export class UdpTransport {
         this.client.connect(this.remotePort, this.remoteAddress, () => {
           this.client.off("error", onConnectError);
           this.connectRan = true;
-          console.log(this.client.address());
           resolve(this.cleanUpController);
         });
       } catch (e: unknown) {
