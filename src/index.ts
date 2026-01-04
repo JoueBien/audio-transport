@@ -1,6 +1,7 @@
 export { UdpTransport, type ListenerCleanUpFunc } from "./UdpTransport";
 export { mockUdpServer, type MockUdpServer } from "./mocks/mockUdpServer";
 export { delay } from "./utils/delay";
+export { timestamp } from "./utils/timestamp";
 export { EventEmitterController } from "./utils/EventEmitterController";
 
 export {
@@ -16,3 +17,5 @@ export { decodeAndPopFloat } from "./utils/decoders/decodeAndPopFloat";
 export { decodeAndPopInit } from "./utils/decoders/decodeAndPopInit";
 export { decodeAndPopInit8Bit } from "./utils/decoders/decodeAndPopInit8Bit";
 export { decodeAndPopPaddedString } from "./utils/decoders/decodeAndPopPaddedString";
+export { decodeAndPopInt64Bit } from "./utils/decoders/decodeAndPopInt64Bit";
+export { decodeAndPopTerminatedString } from "./utils/decoders/decodeAndPopTerminatedString";

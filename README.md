@@ -161,11 +161,14 @@ This library includes several utilities to encode values into a buffer that can 
 ```typescript
 import { intEncoder } from "@joue-bien/audio-transport";
 
-// Encode to 4 bytes.
+// Encoded to 4 bytes.
 const buffer = intEncoder.encode(123);
 
-// Encode to 1 byte.
+// Encoded to 1 byte.
 const buffer = intEncoder.encode8Bit(123);
+
+// Encoded a number/bigInt into 8 bytes.
+const buffer = intEncoder.encode8Bit(BigInt(123));
 ```
 
 ### Encoding floats
@@ -173,7 +176,7 @@ const buffer = intEncoder.encode8Bit(123);
 ```typescript
 import { floatEncoder } from "@joue-bien/audio-transport";
 
-// Encode to 4 bytes.
+// Encoded to 4 bytes.
 const buffer = floatEncoder.encode(123.1);
 ```
 
@@ -182,12 +185,20 @@ const buffer = floatEncoder.encode(123.1);
 ```typescript
 import { stringEncoder } from "@joue-bien/audio-transport";
 
-// Encode to 4 byte aligned. Padding is added to the end of strings to align the string to 4 byte blocks.
+// Encoded to 4 byte aligned. Padding is added to the end of strings to align the string to 4 byte blocks.
 // Encoded to 16 bytes.
-const buffer = floatEncoder.encodePadded("this is string");
+const buffer = stringEncoder.encodePadded("this is string");
 
-// Encode to 14 bytes.
-const buffer = floatEncoder.encodePadded("this is string");
+// Encoded to 14 bytes.
+const buffer = stringEncoder.encodePadded("this is string");
+
+// Encoded characters into a buffer.
+// Encoded to 2 bytes.
+const buffer = stringEncoder.encodePadded("th");
+
+// Take a regular string and add a null terminator, before encoding it into a buffer.
+// Encoded to 15 bytes - the last byte is null (0).
+const buffer = stringEncoder.encodeTerminated("this is string");
 ```
 
 ### Encoding buffers
@@ -217,20 +228,24 @@ Each decoder will return a unit8Array that contains the value of the buffer with
 import {
   decodeAndPopInit,
   decodeAndPopInit8Bit,
+  decodeAndPopInt64Bit,
 } from "@joue-bien/audio-transport";
 
-// Decode an int stored in 4 bytes.
+// Decode an int, stored in 4 bytes.
 const { number, unit8Array } = decodeAndPopInit(buffer);
 
-// Decode an int stored in 1 byte.
+// Decode an int, stored in 1 byte.
 const { number, unit8Array } = decodeAndPopInit8Bit(buffer);
+
+// Decode an bigInt, stored in 8 bytes.
+const { number, unit8Array } = decodeAndPopInt64Bit(buffer);
 ```
 
 ### Decoding floats
 
 ```typescript
 import { decodeAndPopFloat } from "@joue-bien/audio-transport";
-// Decode a float stored in 4 bytes.
+// Decode a float stored, in 4 bytes.
 const { number, unit8Array } = decodeAndPopFloat(buffer);
 ```
 
@@ -240,13 +255,17 @@ const { number, unit8Array } = decodeAndPopFloat(buffer);
 import {
   decodeAndPopPaddedString,
   decodeAndPopChars,
+  decodeAndPopTerminatedString,
 } from "@joue-bien/audio-transport";
 
-// Decode a string string aligned and padded to 4 byte blocks.
+// Decode a string, string aligned and padded to 4 byte blocks.
 const { str, unit8Array } = decodeAndPopPaddedString(buffer);
 
 // Decode 2 characters into a string
 const { str, unit8Array } = decodeAndPopChars(buffer, 2);
+
+// Decode a string with a null terminator at the end.
+const { str, unit8Array } = decodeAndPopTerminatedString(buffer);
 ```
 
 ### Decoding buffers
@@ -255,6 +274,18 @@ const { str, unit8Array } = decodeAndPopChars(buffer, 2);
 import { decodeAndPopPaddedBuffer } from "@joue-bien/audio-transport";
 // Decode a blob into a unit 8 array. Note the size of the buffer must be a 4 byte int at the start of the input buffer.
 const { blob, unit8Array } = decodeAndPopPaddedBuffer(buffer);
+```
+
+### Timestamps
+
+Use `timestamp.nowRTP` to generate a timestamp suitable for use with RTP Midi.
+
+The timestamp value is returned as a bigInt (64bit int).
+
+```typescript
+import { timestamp } from "@joue-bien/audio-transport";
+
+const nowTime = timestamp.nowRTP();
 ```
 
 ## Mocked transport
