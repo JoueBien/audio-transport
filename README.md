@@ -276,7 +276,16 @@ import { decodeAndPopPaddedBuffer } from "@joue-bien/audio-transport";
 const { blob, unit8Array } = decodeAndPopPaddedBuffer(buffer);
 ```
 
-### Timestamps
+### Decoding bytes
+
+`decodeAndPopBytes` is used to access arbitrary number of bytes at the start of a buffer.
+This is particularly useful if you need to remove padding or decode bits.
+
+```typescript
+const { bytes, unit8Array } = decodeAndPopBytes(buf2, 2);
+```
+
+## Timestamps
 
 Use `timestamp.nowRTP` to generate a timestamp suitable for use with RTP Midi.
 
@@ -287,6 +296,97 @@ import { timestamp } from "@joue-bien/audio-transport";
 
 const nowTime = timestamp.nowRTP();
 ```
+
+## Bit Manipulation
+
+Javascript does not have a good way to manipulate bits with in a byte without using bit wise operators. To make it easy to assign bits within bytes and words this library supports representing a series of bits in a `SBitsArray`.
+
+```typescript
+import { SBitsArray } from "@joue-bien/audio-transport";
+
+const bits: SBitsArray = new SBitsArray();
+bits[0] = "1";
+bits[0] = "0";
+// Results an array like object ["1", "0"].
+```
+
+### Generating SBitsArray from other types
+
+```typescript
+import { SBitsArray } from "@joue-bien/audio-transport";
+// From a string representing a byte.
+const bits = SBitsArray.from("11111111");
+
+// From an array of string bytes.
+const bits = SBitsArray.from(["11111111", "11111111"]);
+
+// From a Unit8Array.
+const bits = SBitsArray.from(Uint8Array.from([255, 255]));
+
+// From a ArrayBuffer.
+const bits = SBitsArray.fromArrayBuffer(Uint8Array.from([255, 255]).buffer);
+
+// From an array of strings.
+const bits = SBitsArray.from(["1", "0", "1"]);
+
+// From an existing SBitsArray.
+const bits = SBitsArray.from(new SBitsArray());
+```
+
+### Joining multiple SBitsArray into a single SBitsArray
+
+```typescript
+import { SBitsArray } from "@joue-bien/audio-transport";
+const bits = SBitsArray.concat([
+  SBitsArray.from("11111111"),
+  SBitsArray.from("00000000"),
+  SBitsArray.from("11111111").toSBits(),
+  SBitsArray.from("00000000").toSBits(),
+]);
+```
+
+### Getting the number of bits stored
+
+```typescript
+import { SBitsArray } from "@joue-bien/audio-transport";
+const bits = SBitsArray.concat([
+  SBitsArray.from("11111111"),
+  SBitsArray.from("00000000"),
+]);
+const noOfBitsInt = bits.length;
+// outputs 16.
+```
+
+### Getting the number of bytes that can be filled
+
+Note if the length of bits is not divisible by 8, the remainder bits will be left out from this calculation.
+
+```typescript
+import { SBitsArray } from "@joue-bien/audio-transport";
+const bits = SBitsArray.concat([
+  SBitsArray.from("11111111"),
+  SBitsArray.from("00000000"),
+]);
+const noOfBitsInt = bits.byteLength;
+// outputs 2.
+```
+
+### Converting back to bytes
+
+```typescript
+import { SBitsArray } from "@joue-bien/audio-transport";
+const bits = SBitsArray.concat([
+  SBitsArray.from("11111111"),
+  SBitsArray.from("00000000"),
+]);
+
+const buffer = bits.buffer; // Outputs ArrayBuffer.
+const buffer = bits.unit8Array; // Outputs Unit8Array.
+```
+
+### Endianness
+
+An `SBitsArray` that represents floats or integers will need to have there buffer or Unit8Array reversed to get the bits in the correct order.
 
 ## Mocked transport
 
@@ -321,7 +421,7 @@ const error = new Failure({
 });
 
 if (error.type === "send-failure") {
-  // handle error
+  // handle error.
   return;
 }
 ```
