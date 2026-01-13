@@ -175,7 +175,8 @@ export class SBitsArray extends Array<SBit> {
 
   /**
    * Add padding to bits so that the bits align to bytes.
-   * This function is destructive and will modify the value in the current instance. */
+   * This function is destructive and will modify the value in the current instance.
+   */
   alignBytes(
     /** Where to insert the padding
      * @default { leading: true }
@@ -187,18 +188,15 @@ export class SBitsArray extends Array<SBit> {
       | { trailing: true }
   ): void {
     const inputs: typeof params = params || { leading: true };
-
-    // Decide if we should insert at start or at end
     const insertAtLead = "trailing" in inputs ? false : true;
 
-    // How many bits to insert
-    // If mod returns 8 we don't need to add any.
+    // If mod returns 8 we don't need to add any as fully devisable by 8.
     const sizeToNextByte = 8 - (this.length % 8);
     if (sizeToNextByte === 8) {
       return;
     }
 
-    // Generate padding as zeros to insert
+    // Generate padding & insert.
     const newParts: SBit[] = [];
     newParts.length = sizeToNextByte;
     newParts.fill("0");
@@ -212,9 +210,10 @@ export class SBitsArray extends Array<SBit> {
 
   /**
    * Add padding to bits so that the bits align to bytes.
-   * This function creates a deep copy and is non-destructive to the original SBitsArray.  */
+   * This function creates a deep copy and is non-destructive to the original SBitsArray.
+   */
   alignToBytes(
-    /** Where to insert the padding
+    /** Where to insert the padding.
      * @default { leading: true }
      */
     params?:
@@ -224,18 +223,15 @@ export class SBitsArray extends Array<SBit> {
       | { trailing: true }
   ): SBitsArray {
     const inputs: typeof params = params || { leading: true };
-
-    // Decide if we should insert at start or at end
     const insertAtLead = "trailing" in inputs ? false : true;
 
-    // How many bits to insert
-    // If mod returns 8 we don't need to add any.
+    // If mod returns 8 we don't need to add any as fully devisable by 8.
     const sizeToNextByte = 8 - (this.length % 8);
     if (sizeToNextByte === 8) {
       return SBitsArray.concat([this]);
     }
 
-    // Generate padding as zeros to insert
+    // Generate padding & insert.
     const newParts: SBit[] = [];
     newParts.length = sizeToNextByte;
     newParts.fill("0");

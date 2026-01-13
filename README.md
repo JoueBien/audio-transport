@@ -384,6 +384,35 @@ const buffer = bits.buffer; // Outputs ArrayBuffer.
 const buffer = bits.unit8Array; // Outputs Unit8Array.
 ```
 
+### Aligning to bytes.
+
+As `.buffer` and `.unit8Array` will drop bits if they don't fit into bytes. To avoid this behaviour we can fill in the missing bits with `alignBytes` or `alignToBytes` so that all the bits get included when converting back to buffer or a unit array. `alignBytes` will add zeros to the the `SBitsArray` it's called on. `alignToBytes` creates a deep copy and adds the zeros padding to the copy.
+
+```typescript
+import { SBitsArray } from "@joue-bien/audio-transport";
+const bits = SBitsArray.concat([["1", "1"]]);
+console.log(bits.length); // outputs 2
+
+const buffer = bits.buffer; // Outputs empty buffer.
+const buffer = bits.unit8Array; // Outputs empty Unit8Array.
+
+// Mutate original object to
+// ["0", "0", "0", "0", "0", "1", "1"]
+bits.alignBytes(); // deep pads bits
+console.log(bits.length); // outputs 8
+
+const buffer = bits.buffer; // Outputs [3] as buffer.
+const buffer = bits.unit8Array; // Outputs [3] as Unit8Array.
+
+// Create a deep copy and mutate copy to
+// ["0", "0", "0", "0", "0", "1", "1"]
+const deepCopy = bits.alignToBytes(); // deep pads bits
+console.log(deepCopy.length); // outputs 8
+
+const deepCopy = bits.buffer; // Outputs [3] as buffer.
+const deepCopy = bits.unit8Array; // Outputs [3] as Unit8Array.
+```
+
 ### Endianness
 
 An `SBitsArray` that represents floats or integers will need to have there buffer or Unit8Array reversed to get the bits in the correct order.
