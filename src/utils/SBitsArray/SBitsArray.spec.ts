@@ -100,4 +100,68 @@ describe("SBitsArray", () => {
     expect(res1.unit8Array).toMatchObject({ "0": 0, "1": 0 });
     expect(res2.unit8Array).toMatchObject({ "0": 0, "1": 0 });
   });
+
+  it("is padded leading when alignBytes is called", () => {
+    const res = new SBitsArray(2);
+    res[0] = "1";
+    res[1] = "1";
+    res.alignBytes();
+
+    expect(res.length).toBe(8);
+    expect(res.unit8Array[0]).toBe(3);
+
+    const res1 = new SBitsArray(2);
+    res1[0] = "1";
+    res1[1] = "1";
+    res1.alignBytes({ leading: true });
+
+    expect(res1.length).toBe(8);
+    expect(res1.unit8Array[0]).toBe(3);
+  });
+
+  it("is padded trailing when alignBytes is called", () => {
+    const res = new SBitsArray(2);
+    res[0] = "1";
+    res[1] = "1";
+    res.alignBytes({ trailing: true });
+    expect(res.length).toBe(8);
+    expect(res.unit8Array[0]).toBe(192);
+  });
+
+  it("is padded leading when alignToBytes is called", () => {
+    const input = new SBitsArray(2);
+    input[0] = "1";
+    input[1] = "1";
+    const res = input.alignToBytes();
+
+    expect(input.length).toBe(2);
+    expect(input.unit8Array[0]).toBe(undefined);
+
+    expect(res.length).toBe(8);
+    expect(res.unit8Array[0]).toBe(3);
+
+    const input2 = new SBitsArray(2);
+    input2[0] = "1";
+    input2[1] = "1";
+    const res2 = input.alignToBytes({ leading: true });
+
+    expect(input2.length).toBe(2);
+    expect(input2.unit8Array[0]).toBe(undefined);
+
+    expect(res2.length).toBe(8);
+    expect(res2.unit8Array[0]).toBe(3);
+  });
+
+  it("is padded trailing when alignToBytes is called", () => {
+    const input = new SBitsArray(2);
+    input[0] = "1";
+    input[1] = "1";
+    const res = input.alignToBytes({ trailing: true });
+
+    expect(input.length).toBe(2);
+    expect(input.unit8Array[0]).toBe(undefined);
+
+    expect(res.length).toBe(8);
+    expect(res.unit8Array[0]).toBe(192);
+  });
 });

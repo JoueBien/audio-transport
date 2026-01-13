@@ -172,6 +172,82 @@ export class SBitsArray extends Array<SBit> {
   get buffer() {
     return this.unit8Array.buffer;
   }
+
+  /**
+   * Add padding to bits so that the bits align to bytes.
+   * This function is destructive and will modify the value in the current instance. */
+  alignBytes(
+    /** Where to insert the padding
+     * @default { leading: true }
+     */
+    params?:
+      | {
+          leading: true;
+        }
+      | { trailing: true }
+  ): void {
+    const inputs: typeof params = params || { leading: true };
+
+    // Decide if we should insert at start or at end
+    const insertAtLead = "trailing" in inputs ? false : true;
+
+    // How many bits to insert
+    // If mod returns 8 we don't need to add any.
+    const sizeToNextByte = 8 - (this.length % 8);
+    if (sizeToNextByte === 8) {
+      return;
+    }
+
+    // Generate padding as zeros to insert
+    const newParts: SBit[] = [];
+    newParts.length = sizeToNextByte;
+    newParts.fill("0");
+
+    if (insertAtLead) {
+      this.unshift(...newParts);
+    } else {
+      this.push(...newParts);
+    }
+  }
+
+  /**
+   * Add padding to bits so that the bits align to bytes.
+   * This function creates a deep copy and is non-destructive to the original SBitsArray.  */
+  alignToBytes(
+    /** Where to insert the padding
+     * @default { leading: true }
+     */
+    params?:
+      | {
+          leading: true;
+        }
+      | { trailing: true }
+  ): SBitsArray {
+    const inputs: typeof params = params || { leading: true };
+
+    // Decide if we should insert at start or at end
+    const insertAtLead = "trailing" in inputs ? false : true;
+
+    // How many bits to insert
+    // If mod returns 8 we don't need to add any.
+    const sizeToNextByte = 8 - (this.length % 8);
+    if (sizeToNextByte === 8) {
+      return SBitsArray.concat([this]);
+    }
+
+    // Generate padding as zeros to insert
+    const newParts: SBit[] = [];
+    newParts.length = sizeToNextByte;
+    newParts.fill("0");
+
+    if (insertAtLead) {
+      const ret = SBitsArray.concat([newParts, this]);
+      return ret;
+    } else {
+      const ret = SBitsArray.concat([this, newParts]);
+      return ret;
+    }
+  }
 }
 
 // TODO: make this a look up that is not made using a map
