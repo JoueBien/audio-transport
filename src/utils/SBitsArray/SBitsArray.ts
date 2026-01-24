@@ -13,7 +13,7 @@ import {
 export function sByteToByte(sByte: SByte): Uint8Array<ArrayBufferLike> {
   // Make sure we deep copy.
   return Uint8Array.from(
-    LOOK_UP_S_BYTE_TO_BYTE[sByte] || LOOK_UP_S_BYTE_TO_BYTE[0]
+    LOOK_UP_S_BYTE_TO_BYTE[sByte] || LOOK_UP_S_BYTE_TO_BYTE[0],
   );
 }
 
@@ -54,7 +54,7 @@ export class SBitsArray extends Array<SBit> {
 
   constructor(
     /** The number of bits to start the array with. */
-    size?: number
+    size?: number,
   ) {
     super();
     if (size !== undefined && size > 0) {
@@ -104,7 +104,7 @@ export class SBitsArray extends Array<SBit> {
   /** Produce a SBitsArray from ArrayBuffer. */
   public static fromArrayBuffer(input: ArrayBuffer) {
     const shallowCopy = Array.from(new Uint8Array(input)).map(
-      (item) => LOOK_UP_BYTE_TO_BIT_ARRAY[item] || LOOK_UP_BYTE_TO_BIT_ARRAY[0]
+      (item) => LOOK_UP_BYTE_TO_BIT_ARRAY[item] || LOOK_UP_BYTE_TO_BIT_ARRAY[0],
     );
 
     // Create a deep copy.
@@ -130,7 +130,7 @@ export class SBitsArray extends Array<SBit> {
     if (typeof input === "object" && input instanceof Uint8Array) {
       const shallowCopy = Array.from(input).map(
         (item) =>
-          LOOK_UP_BYTE_TO_BIT_ARRAY[item] || LOOK_UP_BYTE_TO_BIT_ARRAY[0]
+          LOOK_UP_BYTE_TO_BIT_ARRAY[item] || LOOK_UP_BYTE_TO_BIT_ARRAY[0],
       );
 
       // Create a deep copy.
@@ -185,7 +185,7 @@ export class SBitsArray extends Array<SBit> {
       | {
           leading: true;
         }
-      | { trailing: true }
+      | { trailing: true },
   ): void {
     const inputs: typeof params = params || { leading: true };
     const insertAtLead = "trailing" in inputs ? false : true;
@@ -220,7 +220,7 @@ export class SBitsArray extends Array<SBit> {
       | {
           leading: true;
         }
-      | { trailing: true }
+      | { trailing: true },
   ): SBitsArray {
     const inputs: typeof params = params || { leading: true };
     const insertAtLead = "trailing" in inputs ? false : true;
@@ -249,7 +249,7 @@ export class SBitsArray extends Array<SBit> {
 // TODO: make this a look up that is not made using a map
 const LOOK_UP_BYTE_TO_BIT_ARRAY: SBitsArray[] & { length: 256 } =
   LOOK_UP_BYTE_TO_SBYTE.map((sByte) =>
-    SBitsArray.from(sByte)
+    SBitsArray.from(sByte),
   ) as SBitsArray[] & {
     length: 256;
   };

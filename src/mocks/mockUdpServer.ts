@@ -92,9 +92,9 @@ export async function mockUdpServer(params?: {
               new Failure({
                 type: "time-out",
                 message: "waitForMessageOnServer did not receive a message.",
-              })
+              }),
             );
-          }
+          },
         );
       });
 
@@ -146,9 +146,9 @@ export async function mockUdpServer(params?: {
               new Failure({
                 type: "time-out",
                 message: "waitForMessageOnServer did not receive a message.",
-              })
+              }),
             );
-          }
+          },
         );
       });
 
@@ -157,7 +157,7 @@ export async function mockUdpServer(params?: {
 
     /** Adds a message listener & returns a function that can be used to clean up the listener.  */
     addMessageHandlerMock: (
-      action: (msg: Buffer, rinfo: RemoteInfo) => void
+      action: (msg: Buffer, rinfo: RemoteInfo) => void,
     ) => {
       const cleanUp = server.onMessage(action);
       return cleanUp;
@@ -165,7 +165,7 @@ export async function mockUdpServer(params?: {
 
     /** Adds a once message listener & returns a function that can be used to clean up the listener.  */
     addMessageHandlerMockOnce: (
-      action: (msg: Buffer, rinfo: RemoteInfo) => void
+      action: (msg: Buffer, rinfo: RemoteInfo) => void,
     ) => {
       const cleanUp = server.onOnceMessage(action);
       return cleanUp;
