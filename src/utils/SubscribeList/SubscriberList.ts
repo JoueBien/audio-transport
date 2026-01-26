@@ -28,7 +28,7 @@ export class SubscriberList {
   private lock: boolean = false;
 
   /** A queue of items scheduled to be added or removed. First in first processed. */
-  queue: (
+  private queue: (
     | {
         add: Subscriber;
       }
