@@ -94,7 +94,7 @@ describe("UdpTransport", () => {
     }
 
     expect(
-      decodeAndPopPaddedString(Uint8Array.from(messageReceived.msg)).str
+      decodeAndPopPaddedString(Uint8Array.from(messageReceived.msg)).str,
     ).toBe("/message");
   });
 
@@ -117,7 +117,7 @@ describe("UdpTransport", () => {
     }
 
     expect(
-      decodeAndPopPaddedString(Uint8Array.from(messageReceived.msg)).str
+      decodeAndPopPaddedString(Uint8Array.from(messageReceived.msg)).str,
     ).toBe("/message");
   });
 
@@ -152,5 +152,27 @@ describe("UdpTransport", () => {
     });
 
     server.cleanUpController.abort();
+  });
+
+  it("accepts an external abort controller", () => {
+    const abortController = new AbortController();
+
+    const client1 = new UdpTransport({
+      remotePort: 9000,
+      responsePort: 9001,
+      cleanUpController: abortController,
+    });
+    const client2 = new UdpTransport({
+      remotePort: 9000,
+      responsePort: 9001,
+      cleanUpController: abortController,
+    });
+
+    expect(client1.cleanUpController).toEqual(client2.cleanUpController);
+
+    abortController.abort();
+
+    expect(client1.cleanUpController.signal.aborted).toBeTruthy();
+    expect(client2.cleanUpController.signal.aborted).toBeTruthy();
   });
 });

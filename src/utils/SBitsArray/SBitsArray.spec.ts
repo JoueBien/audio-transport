@@ -164,4 +164,27 @@ describe("SBitsArray", () => {
     expect(res.length).toBe(8);
     expect(res.unit8Array[0]).toBe(192);
   });
+
+  it("is equal does an equality check on value not referance", () => {
+    const one = new SBitsArray(8);
+    const two = SBitsArray.from("00000101");
+    const three = SBitsArray.from("00000101");
+    const four = SBitsArray.from(["00000101", "00000101"]);
+
+    // Same size
+    expect(one.equals(one)).toBeTruthy();
+    expect(one.equals(two)).toBeFalsy();
+    expect(two.equals(three)).toBeTruthy();
+    expect(two.equals(three, { from: 0, to: 4 })).toBeTruthy();
+
+    // Different size sub array
+    expect(two.equals(four, { from: 4, to: 7 })).toBeTruthy();
+    expect(two.equals(four, { from: 0, to: 0 })).toBeTruthy();
+
+    // With no from
+    expect(two.equals(four, { to: 4 })).toBeTruthy();
+
+    // With no to
+    expect(two.equals(four, { from: 1 })).toBeFalsy();
+  });
 });

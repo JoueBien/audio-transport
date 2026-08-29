@@ -34,3 +34,4 @@ export { SubscriberList } from "./utils/SubscribeList/SubscriberList";
 export { delay } from "./utils/delay";
 export { timestamp } from "./utils/timestamp";
 export { EventEmitterController } from "./utils/EventEmitterController";
+export { counterFactory } from "./utils/counterFactory";

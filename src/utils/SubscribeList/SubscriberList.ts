@@ -56,7 +56,7 @@ export class SubscriberList {
       // Clean up the check intivals.
       clearInterval(intervalId);
       // Clean up any pending subscrbers.
-      Object.keys(this.subscribers).forEach((key) => {
+      (Object.keys(this.subscribers) as SubscriberId[]).forEach((key) => {
         const sub: SubscriberAndExpireListner = this.subscribers[key];
         clearTimeout(sub.intervalId);
       });
@@ -137,29 +137,35 @@ export class SubscriberList {
 
   // TODO: Swap over to map so we don't need the type cast
   getSubscribersByReason(reason: string): SubscriberId[] {
-    const keys = Object.keys(this.subscribers).filter((key) => {
-      const subscriber: Subscriber | undefined = this.subscribers[key];
-      return subscriber.reason === reason;
-    });
+    const keys = (Object.keys(this.subscribers) as SubscriberId[]).filter(
+      (key) => {
+        const subscriber: Subscriber | undefined = this.subscribers[key];
+        return subscriber.reason === reason;
+      },
+    );
     return keys as SubscriberId[];
   }
 
   // TODO: Swap over to map so we don't need the type cast
   getSubscribersByRemoteAddress(remoteAddress: string): SubscriberId[] {
-    const keys = Object.keys(this.subscribers).filter((key) => {
-      const subscriber: Subscriber | undefined = this.subscribers[key];
-      return subscriber.remoteAddress === remoteAddress;
-    });
-    return keys as SubscriberId[];
+    const keys = (Object.keys(this.subscribers) as SubscriberId[]).filter(
+      (key) => {
+        const subscriber: Subscriber | undefined = this.subscribers[key];
+        return subscriber.remoteAddress === remoteAddress;
+      },
+    );
+    return keys;
   }
 
   // TODO: Swap over to map so we don't need the type cast
   getSubscribersByRemotePort(remotePort: number): SubscriberId[] {
-    const keys = Object.keys(this.subscribers).filter((key) => {
-      const subscriber: Subscriber | undefined = this.subscribers[key];
-      return subscriber.remotePort === remotePort;
-    });
-    return keys as SubscriberId[];
+    const keys = (Object.keys(this.subscribers) as SubscriberId[]).filter(
+      (key) => {
+        const subscriber: Subscriber | undefined = this.subscribers[key];
+        return subscriber.remotePort === remotePort;
+      },
+    );
+    return keys;
   }
 
   /** Call the clean up functions.

@@ -16,7 +16,7 @@ export class UdpTransport {
   private connectRan: boolean = false;
   private listenRan: boolean = false;
 
-  cleanUpController = new AbortController();
+  cleanUpController: AbortController;
 
   constructor(params: {
     /** Remote port to send messages to. */
@@ -31,11 +31,16 @@ export class UdpTransport {
      * This is normally the port the remote OSC server to replies to.
      */
     responsePort: number;
+
+    /** An external abort controller. Useful if you need to tie multiple instances to the same abort. */
+    cleanUpController?: AbortController;
   }) {
     // Set Local State
     this.remoteAddress = params.remoteAddress || "localhost";
     this.remotePort = params.remotePort || 1005;
     this.responsePort = params.responsePort;
+    this.cleanUpController = params.cleanUpController || new AbortController();
+
     // Set Client
     const client = dgram.createSocket({
       type: "udp4",
@@ -108,7 +113,7 @@ export class UdpTransport {
     >((resolve, rejects) => {
       this.listenRan = false;
       // Deal with error
-      function onConnectError(err: Error) {
+      const onConnectError = (err: Error) => {
         listenAbort.abort();
         this.listenRan = false;
         console.error(err);
@@ -118,9 +123,9 @@ export class UdpTransport {
           new Failure({
             type: "listen-failed",
             message: err.message,
-          })
+          }),
         );
-      }
+      };
       try {
         this.client.once("error", onConnectError);
         this.client.bind(this.responsePort);
@@ -163,7 +168,7 @@ export class UdpTransport {
     >((resolve, rejects) => {
       this.connectRan = false;
       // Deal with error
-      function onConnectError(err: Error) {
+      const onConnectError = (err: Error) => {
         this.connectRan = false;
         console.error(err);
         console.trace(err);
@@ -172,9 +177,9 @@ export class UdpTransport {
           new Failure({
             type: "connection-failed",
             message: err.message,
-          })
+          }),
         );
-      }
+      };
       try {
         this.client.once("error", onConnectError);
         this.client.bind(this.responsePort);
@@ -218,15 +223,19 @@ export class UdpTransport {
           msg,
           remotePort,
           remoteAddress,
-          (err: Failure<"send-failure">) => {
+          (err: Error | null, _bytes: number) => {
             if (err !== null) {
-              err.type = "send-failure";
-              return resolve(err);
+              return resolve(
+                Failure.from({
+                  error: err,
+                  type: "send-failure",
+                }),
+              );
             }
             return resolve("ok");
-          }
+          },
         );
-      }
+      },
     );
     return floatingPromise;
   }
@@ -237,7 +246,7 @@ export class UdpTransport {
    * Can't be called if `this.listen();` has been called.
    */
   async send(
-    msg: string | NodeJS.ArrayBufferView
+    msg: string | NodeJS.ArrayBufferView,
   ): Promise<Result<"ok", "send-failure" | "aborted" | "not-connected">> {
     const connectedOrError = await this.isConnectionOk();
     if (connectedOrError !== "ok") {
@@ -246,21 +255,25 @@ export class UdpTransport {
 
     const floatingPromise = new Promise<Result<"ok", "send-failure">>(
       (resolve) => {
-        this.client.send(msg, (err: Failure<"send-failure">) => {
+        this.client.send(msg, (err: Error | null, _bytes: number) => {
           if (err !== null) {
-            err.type = "send-failure";
-            return resolve(err);
+            return resolve(
+              Failure.from({
+                error: err,
+                type: "send-failure",
+              }),
+            );
           }
           return resolve("ok");
         });
-      }
+      },
     );
     return floatingPromise;
   }
 
   /** Adds a message listener & returns a function that can be used to clean up the listener. */
   onMessage(
-    callBack: (msg: Buffer, rinfo: dgram.RemoteInfo) => void
+    callBack: (msg: Buffer, rinfo: dgram.RemoteInfo) => void,
   ): ListenerCleanUpFunc {
     this.client.on("message", callBack);
     const cleanUp = () => {
@@ -271,7 +284,7 @@ export class UdpTransport {
 
   /** Adds a once message listener & returns a function that can be used to clean up the listener. */
   onOnceMessage(
-    callBack: (msg: Buffer, rinfo: dgram.RemoteInfo) => void
+    callBack: (msg: Buffer, rinfo: dgram.RemoteInfo) => void,
   ): ListenerCleanUpFunc {
     this.client.once("message", callBack);
     const cleanUp = () => {
@@ -296,7 +309,7 @@ export class UdpTransport {
 
   /** Adds a once error listener & returns a function that can be used to clean up the error. */
   onOnceError(
-    callBack: (err: Failure<"on-error">) => void
+    callBack: (err: Failure<"on-error">) => void,
   ): ListenerCleanUpFunc {
     function errorWrapper(error: Failure<"on-error">) {
       error.type = "on-error";

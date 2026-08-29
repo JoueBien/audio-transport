@@ -1,3 +1,4 @@
+import * as util from "node:util";
 import {
   LOOK_UP_BYTE_TO_SBYTE,
   LOOK_UP_S_BYTE_TO_BYTE,
@@ -12,9 +13,7 @@ import {
  */
 export function sByteToByte(sByte: SByte): Uint8Array<ArrayBufferLike> {
   // Make sure we deep copy.
-  return Uint8Array.from(
-    LOOK_UP_S_BYTE_TO_BYTE[sByte] || LOOK_UP_S_BYTE_TO_BYTE[0],
-  );
+  return Uint8Array.from(LOOK_UP_S_BYTE_TO_BYTE[sByte]);
 }
 
 export function bitsToSByte(bits: SBitsArray | SBit[]) {
@@ -48,6 +47,7 @@ function sByteToBits(input: SByte) {
 }
 
 /** An array like class that represents a series of bits. */
+// @ts-ignore: we are ignoreing the from overide function not mathcing the def. We don't want the any.
 export class SBitsArray extends Array<SBit> {
   length: number = 0;
   [n: number]: SBit;
@@ -243,6 +243,38 @@ export class SBitsArray extends Array<SBit> {
       const ret = SBitsArray.concat([this, newParts]);
       return ret;
     }
+  }
+
+  /** A function for compareing the bits in the SBitsArray to see if they are the same.  */
+  equals(
+    compare: SBitsArray,
+    args?: {
+      from?: number;
+      to?: number;
+    },
+  ): boolean {
+    const largestLength =
+      this.length >= compare.length ? this.length : compare.length;
+
+    // Equal check on strings
+    const { from = 0, to = largestLength - 1 } = args || {};
+    for (let i = from; i <= to; i++) {
+      if (this[i] !== compare[i]) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  [util.inspect.custom]() {
+    const str = this.reduce<string>((all, next, index): string => {
+      const lineBreakAt8 = (index + 1) % 8 === 0 ? "\n" : "";
+      return `${all}${next}${lineBreakAt8}`;
+    }, "");
+
+    const putLastBreacktOnNewLine = this.length % 8 === 0 ? "" : "\n";
+
+    return `SBitsArray:<[\n${str}${putLastBreacktOnNewLine}]>`;
   }
 }
 

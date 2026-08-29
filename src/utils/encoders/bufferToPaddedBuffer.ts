@@ -19,9 +19,11 @@ const BUFFER_PADDING = {
  * <values int32> is encoded backwards & so is the data.
  */
 
-export function calcBufferPadding(strBuffer: Uint8Array<ArrayBuffer>) {
+export function calcBufferPadding(
+  strBuffer: Uint8Array<ArrayBuffer>,
+): 0 | 1 | 2 | 3 | 4 {
   const paddingNo = 4 - (strBuffer.length % 4);
-  return paddingNo;
+  return paddingNo as 0 | 1 | 2 | 3 | 4;
 }
 
 export function bufferToPaddedBuffer(buffer: Uint8Array<ArrayBuffer>) {

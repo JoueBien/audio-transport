@@ -60,7 +60,7 @@ export async function mockUdpServer(params?: {
        */
       exitMs?: number;
     }) => {
-      const { exitMs } = params;
+      const { exitMs } = params || {};
       const rejectController = new AbortController();
       let cleanUp = () => {};
 
@@ -73,7 +73,7 @@ export async function mockUdpServer(params?: {
           "time-out"
         >
       >((resolve) => {
-        function callback(msg, rinfo) {
+        function callback(msg: Buffer<ArrayBufferLike>, rinfo: RemoteInfo) {
           {
             // console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
             rejectController.abort();
@@ -125,7 +125,7 @@ export async function mockUdpServer(params?: {
           "time-out"
         >
       >((resolve) => {
-        function callback(msg, rinfo) {
+        function callback(msg: Buffer<ArrayBufferLike>, rinfo: RemoteInfo) {
           {
             if (matches.equals(msg)) {
               // console.log(`server got: ${msg} from ${rinfo.address}:${rinfo.port}`);
