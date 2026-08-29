@@ -18,24 +18,3 @@ The library is primarily focused on providing a base UDP transport and utilities
 # Documintation
 
 Documintation can be found on the projects [GitHub Wiki](https://github.com/JoueBien/audio-transport/wiki).
-
-## Table of contence
-
-### Overview
-
-- [Overview](https://github.com/JoueBien/audio-transport/wiki)
-
-### Transports
-
-- [UDP Transport](https://github.com/JoueBien/audio-transport/wiki/UDP-Transport)
-- [UDP Transport Mocks](https://github.com/JoueBien/audio-transport/wiki/UDP-Transport-Mocks)
-
-### Utils
-
-- [Buffer Encoding and Decoding](https://github.com/JoueBien/audio-transport/wiki/Buffer-Encoding-and-Decoding)
-- [Bit Manipulation](https://github.com/JoueBien/audio-transport/wiki/Bit-Manipulation)
-- [Timestamps](https://github.com/JoueBien/audio-transport/wiki/Timestamps)
-
-### Other
-
-- [Error Handling](https://github.com/JoueBien/audio-transport/wiki/Error-Handling)
