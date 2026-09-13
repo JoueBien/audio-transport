@@ -19,6 +19,7 @@ export { decodeAndPopPaddedString } from "./utils/decoders/decodeAndPopPaddedStr
 export { decodeAndPopInt64Bit } from "./utils/decoders/decodeAndPopInt64Bit";
 export { decodeAndPopTerminatedString } from "./utils/decoders/decodeAndPopTerminatedString";
 export { decodeAndPopBytes } from "./utils/decoders/decodeAndPopBytes";
+export { decodeAndPopInit16Bit } from "./utils/decoders/decodeAndPopInit16Bit";
 
 // Bits Array
 export { SBitsArray } from "./utils/SBitsArray/SBitsArray";

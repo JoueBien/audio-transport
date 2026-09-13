@@ -8,11 +8,13 @@ export const intEncoder = {
   encode8Bit: function encode(number: number) {
     return new Uint8Array(Uint8Array.of(number).buffer).reverse();
   },
+  encode16Bit: function encode(number: number) {
+    return new Uint8Array(Uint16Array.of(number).buffer).reverse();
+  },
   encode64Bit: function (number: bigint | number) {
     return new Uint8Array(
-      BigInt64Array.of(
-        typeof number === "bigint" ? number : BigInt(number)
-      ).buffer
+      BigInt64Array.of(typeof number === "bigint" ? number : BigInt(number))
+        .buffer,
     ).reverse();
   },
 };
