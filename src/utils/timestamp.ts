@@ -4,6 +4,8 @@ export const timestamp = {
    * This timestamp is suitable for use in RTP Midi messages.
    */
   nowRTP(): bigint {
-    return BigInt(Math.trunc(performance.timeOrigin + performance.now() * 10));
+    return BigInt(
+      Math.trunc((performance.timeOrigin + performance.now()) * 10),
+    );
   },
 };
