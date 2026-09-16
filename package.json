@@ -1,6 +1,6 @@
 {
   "name": "@joue-bien/audio-transport",
-  "version": "0.0.11",
+  "version": "1.0.0",
   "main": "src/index.ts",
   "scripts": {
     "test": "vitest --coverage --run",

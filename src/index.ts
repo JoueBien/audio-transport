@@ -5,6 +5,7 @@ export { mockUdpServer, type MockUdpServer } from "./mocks/mockUdpServer";
 // Encode Decode
 export {
   intEncoder,
+  unsignedIntEncoder,
   floatEncoder,
   stringEncoder,
   bufferEncoder,
@@ -13,13 +14,20 @@ export {
 export { decodeAndPopPaddedBuffer } from "./utils/decoders/decodeAndPopPaddedBuffer";
 export { decodeAndPopChars } from "./utils/decoders/decodeAndPopChars";
 export { decodeAndPopFloat } from "./utils/decoders/decodeAndPopFloat";
-export { decodeAndPopInit } from "./utils/decoders/decodeAndPopInit";
-export { decodeAndPopInit8Bit } from "./utils/decoders/decodeAndPopInit8Bit";
 export { decodeAndPopPaddedString } from "./utils/decoders/decodeAndPopPaddedString";
-export { decodeAndPopInt64Bit } from "./utils/decoders/decodeAndPopInt64Bit";
 export { decodeAndPopTerminatedString } from "./utils/decoders/decodeAndPopTerminatedString";
 export { decodeAndPopBytes } from "./utils/decoders/decodeAndPopBytes";
-export { decodeAndPopInit16Bit } from "./utils/decoders/decodeAndPopInit16Bit";
+
+// Inits
+export { decodeAndPopInit } from "./utils/decoders/intSigned/decodeAndPopInit";
+export { decodeAndPopInit8Bit } from "./utils/decoders/intSigned/decodeAndPopInit8Bit";
+export { decodeAndPopInt64Bit } from "./utils/decoders/intSigned/decodeAndPopInt64Bit";
+export { decodeAndPopInit16Bit } from "./utils/decoders/intSigned/decodeAndPopInit16Bit";
+
+// Unsigned Ints
+export { decodeAndPopUnsignedInit } from "./utils/decoders/intUnSigned/decodeAndPopUnsignedInit";
+export { decodeAndPopUnsignedInit16Bit } from "./utils/decoders/intUnSigned/decodeAndPopUnsignedInit16Bit";
+export { decodeAndPopUnsignedInit8Bit } from "./utils/decoders/intUnSigned/decodeAndPopUnsignedInit8Bit";
 
 // Bits Array
 export { SBitsArray } from "./utils/SBitsArray/SBitsArray";

@@ -1,4 +1,4 @@
-import { decodeAndPopInit } from "./decodeAndPopInit";
+import { decodeAndPopUnsignedInit } from "./intUnSigned/decodeAndPopUnsignedInit";
 
 /**
  * Blobs are encoded as follows:
@@ -11,7 +11,7 @@ import { decodeAndPopInit } from "./decodeAndPopInit";
  */
 export function decodeAndPopPaddedBuffer(unit8Buf: Uint8Array<ArrayBuffer>) {
   const { number: bufferSize, unit8Array: _blob8Array } =
-    decodeAndPopInit(unit8Buf);
+    decodeAndPopUnsignedInit(unit8Buf);
   const blob8Array = _blob8Array.slice(0, bufferSize * 4);
   const nextBuf = _blob8Array.slice(bufferSize * 4);
 

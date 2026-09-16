@@ -1,4 +1,4 @@
-import { intEncoder } from "../encoders";
+import { intEncoder } from "../../encoders";
 import { decodeAndPopInit } from "./decodeAndPopInit";
 
 describe("decodeAndPopInit", () => {
@@ -12,5 +12,11 @@ describe("decodeAndPopInit", () => {
     const input = intEncoder.encode(1234567890);
     const res = decodeAndPopInit(input);
     expect(res.number).toBe(1234567890);
+  });
+
+  it("handles negtive numbers", () => {
+    const input = intEncoder.encode(-100);
+    const res = decodeAndPopInit(input);
+    expect(res.number).toBe(-100);
   });
 });

@@ -6,8 +6,9 @@ import {
 
 import { decodeAndPopPaddedBuffer } from "./decodeAndPopPaddedBuffer";
 import { decodeAndPopFloat } from "./decodeAndPopFloat";
-import { decodeAndPopInit } from "./decodeAndPopInit";
+
 import { decodeAndPopPaddedString } from "./decodeAndPopPaddedString";
+import { decodeAndPopInit } from "./intSigned/decodeAndPopInit";
 
 describe("decodeAndPopBlob", () => {
   it("encodes and decodes", () => {
@@ -16,10 +17,10 @@ describe("decodeAndPopBlob", () => {
         intEncoder.encode(12134),
         floatEncoder.encode(1234.1234),
         stringToPaddedBuffer("athing"),
-      ])
+      ]),
     );
     const { number: res1, unit8Array: unit8Array1 } = decodeAndPopInit(
-      decodeAndPopPaddedBuffer(input).blob
+      decodeAndPopPaddedBuffer(input).blob,
     );
     const { number: res2, unit8Array: unit8Array2 } =
       decodeAndPopFloat(unit8Array1);
@@ -34,7 +35,7 @@ describe("decodeAndPopBlob", () => {
 
   it("1 byte is padded with 000", () => {
     const input = bufferEncoder.encodePadded(
-      Buffer.from(textEncoder.encode("1"))
+      Buffer.from(textEncoder.encode("1")),
     );
     const res = decodeAndPopPaddedBuffer(input);
     expect(res.blob.length).toBe(4);
@@ -42,7 +43,7 @@ describe("decodeAndPopBlob", () => {
 
   it("2 byte is padded with 00s", () => {
     const input = bufferEncoder.encodePadded(
-      Buffer.from(textEncoder.encode("12"))
+      Buffer.from(textEncoder.encode("12")),
     );
     const res = decodeAndPopPaddedBuffer(input);
     expect(res.blob.length).toBe(4);
@@ -50,7 +51,7 @@ describe("decodeAndPopBlob", () => {
 
   it("3 byte is padded with 0", () => {
     const input = bufferEncoder.encodePadded(
-      Buffer.from(textEncoder.encode("123"))
+      Buffer.from(textEncoder.encode("123")),
     );
     const res = decodeAndPopPaddedBuffer(input);
     expect(res.blob.length).toBe(4);
@@ -58,7 +59,7 @@ describe("decodeAndPopBlob", () => {
 
   it("4 byte has no padding", () => {
     const input = bufferEncoder.encodePadded(
-      Buffer.from(textEncoder.encode("1234"))
+      Buffer.from(textEncoder.encode("1234")),
     );
     const res = decodeAndPopPaddedBuffer(input);
     expect(res.blob.length).toBe(4);

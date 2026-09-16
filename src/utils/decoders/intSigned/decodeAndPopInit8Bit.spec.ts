@@ -1,12 +1,12 @@
-import { intEncoder, stringEncoder } from "../encoders";
-import { decodeAndPopChars } from "./decodeAndPopChars";
+import { intEncoder, stringEncoder } from "../../encoders";
+import { decodeAndPopChars } from "./../decodeAndPopChars";
 import { decodeAndPopInit } from "./decodeAndPopInit";
 import { decodeAndPopInit8Bit } from "./decodeAndPopInit8Bit";
 
 describe("decodeAndPopInit8Bit", () => {
   it("encodes and decodes", () => {
     const input = Buffer.concat([
-      intEncoder.encode8Bit(255), // Padding
+      intEncoder.encode8Bit(-127), // Padding
       intEncoder.encode8Bit(4), // Padding
       Buffer.from(stringEncoder.encodeChars("IN")), // Command
       intEncoder.encode(2), // Protocol Version no
@@ -16,7 +16,7 @@ describe("decodeAndPopInit8Bit", () => {
     ]);
 
     const { number: firstInt, unit8Array: buf1 } = decodeAndPopInit8Bit(input);
-    expect(firstInt).toBe(255);
+    expect(firstInt).toBe(-127);
 
     const { number: secondInit, unit8Array: buf2 } = decodeAndPopInit8Bit(buf1);
     expect(secondInit).toBe(4);

@@ -1,24 +1,8 @@
 import { bufferToPaddedBuffer } from "./bufferToPaddedBuffer";
 import { stringToPaddedBuffer, textEncoder } from "./stringToPaddedBuffer";
 
-export const intEncoder = {
-  encode: function encode(number: number) {
-    return new Uint8Array(Uint32Array.of(number).buffer).reverse();
-  },
-  encode8Bit: function encode(number: number) {
-    return new Uint8Array(Uint8Array.of(number).buffer).reverse();
-  },
-  encode16Bit: function encode(number: number) {
-    return new Uint8Array(Uint16Array.of(number).buffer).reverse();
-  },
-  encode64Bit: function (number: bigint | number) {
-    return new Uint8Array(
-      BigInt64Array.of(typeof number === "bigint" ? number : BigInt(number))
-        .buffer,
-    ).reverse();
-  },
-};
-
+export { intEncoder } from "./intSigned";
+export { unsignedIntEncoder } from "./intUnsigned";
 export const floatEncoder = {
   encode: function encode(number: number) {
     return new Uint8Array(Float32Array.of(number).buffer).reverse();

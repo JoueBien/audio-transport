@@ -2,7 +2,7 @@ import { intEncoder, stringEncoder } from "../encoders";
 import { byteToSByte, sByteToByte } from "../SBitsArray/SBitsArray";
 import { decodeAndPopBytes } from "./decodeAndPopBytes";
 import { decodeAndPopChars } from "./decodeAndPopChars";
-import { decodeAndPopInit8Bit } from "./decodeAndPopInit8Bit";
+import { decodeAndPopInit8Bit } from "./intSigned/decodeAndPopInit8Bit";
 
 describe("decodeAndPopBytes", () => {
   it("encodes and decodes", () => {
