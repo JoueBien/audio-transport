@@ -28,6 +28,7 @@ export { decodeAndPopInit16Bit } from "./utils/decoders/intSigned/decodeAndPopIn
 export { decodeAndPopUnsignedInit } from "./utils/decoders/intUnSigned/decodeAndPopUnsignedInit";
 export { decodeAndPopUnsignedInit16Bit } from "./utils/decoders/intUnSigned/decodeAndPopUnsignedInit16Bit";
 export { decodeAndPopUnsignedInit8Bit } from "./utils/decoders/intUnSigned/decodeAndPopUnsignedInit8Bit";
+export { decodeAndPopUnsignedInt64Bit } from "./utils/decoders/intUnSigned/decodeAndPopUnsignedInt64Bit";
 
 // Bits Array
 export { SBitsArray } from "./utils/SBitsArray/SBitsArray";
