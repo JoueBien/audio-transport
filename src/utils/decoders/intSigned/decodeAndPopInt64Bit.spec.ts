@@ -21,7 +21,7 @@ describe("decodeAndPopInit", () => {
   });
 
   it("handles timestamps", () => {
-    const now = timestamp.nowRTP();
+    const now = timestamp.nowRTP64Bit();
     const input = intEncoder.encode64Bit(now);
     const res = decodeAndPopInt64Bit(input);
     expect(res.number).toBe(now);
