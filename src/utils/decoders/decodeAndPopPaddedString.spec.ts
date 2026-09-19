@@ -20,9 +20,9 @@ describe("decodeAndPopPaddedString", () => {
     const {
       str: res,
       unit8Array: remainder,
-      // popped,
+      popped,
     } = decodeAndPopPaddedString(Uint8Array.from([1, 2, 247, 3, 4]));
-    // expect(popped).toBe(0);
+    expect(popped).toBe(0);
     expect(res).toBe("");
     expect(remainder).toMatchObject(Uint8Array.from([1, 2, 247, 3, 4]));
   });
