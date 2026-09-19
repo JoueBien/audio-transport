@@ -16,6 +16,17 @@ describe("decodeAndPopPaddedString", () => {
     expect(res2.unit8Array.length).toBe(0);
   });
 
+  it("handels terminator not found", () => {
+    const {
+      str: res,
+      unit8Array: remainder,
+      // popped,
+    } = decodeAndPopPaddedString(Uint8Array.from([1, 2, 247, 3, 4]));
+    // expect(popped).toBe(0);
+    expect(res).toBe("");
+    expect(remainder).toMatchObject(Uint8Array.from([1, 2, 247, 3, 4]));
+  });
+
   it("4 char has 0000 padded at end", () => {
     const res = stringEncoder.encodePadded("1234");
     expect(Buffer.from(res).toJSON().data).toEqual([

@@ -1,7 +1,7 @@
 export function decodeAndPopTerminatedBytes(params: {
   unit8Array: Uint8Array<ArrayBuffer>;
   /** The terminated byte. @default 0 */
-  terminator: number;
+  terminator?: number;
 }) {
   const { unit8Array, terminator } = params;
   const byteEndsAt = unit8Array.indexOf(terminator || 0);

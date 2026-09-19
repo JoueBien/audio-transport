@@ -1,6 +1,20 @@
 import { decodeAndPopTerminatedBytes } from "./decodeAndPopTerminatedBytes";
 
 describe("decodeAndPopTerminatedBytes", () => {
+  it("pops the default terminator of 0", () => {
+    const {
+      bytes: res,
+      unit8Array: remainder,
+      popped,
+    } = decodeAndPopTerminatedBytes({
+      unit8Array: Uint8Array.from([1, 2, 0, 3, 4]),
+    });
+
+    expect(popped).toBe(3);
+    expect(res).toMatchObject(Uint8Array.from([1, 2]));
+    expect(remainder).toMatchObject(Uint8Array.from([3, 4]));
+  });
+
   it("pops a custom terminator", () => {
     const {
       bytes: res,
