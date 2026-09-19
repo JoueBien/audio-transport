@@ -11,11 +11,36 @@ describe("decodeAndPopTerminatedString", () => {
     const res1 = decodeAndPopTerminatedString(input);
     const res2 = decodeAndPopTerminatedString(res1.unit8Array);
     // Values match
-    console.log("res1.str", res1.str, res2.str);
+    // console.log("res1.str", res1.str, res2.str);
     expect(res1.str).toBe("/argument");
     expect(res2.str).toBe("ii");
     // Buffer is empty
     expect(res2.unit8Array.length).toBe(4);
+  });
+
+  it("handels terminator not found", () => {
+    const {
+      str: res,
+      unit8Array: remainder,
+      popped,
+    } = decodeAndPopTerminatedString(Uint8Array.from([1, 2, 247, 3, 4]));
+    expect(popped).toBe(0);
+    expect(res).toBe("");
+    expect(remainder).toMatchObject(Uint8Array.from([1, 2, 247, 3, 4]));
+  });
+
+  it("handels standard terminator", () => {
+    const {
+      str: res,
+      unit8Array: remainder,
+      popped,
+    } = decodeAndPopTerminatedString(
+      Uint8Array.from([...stringEncoder.encodeTerminated("12"), 3, 4]),
+    );
+
+    expect(popped).toBe(3);
+    expect(res).toBe("12");
+    expect(remainder).toMatchObject(Uint8Array.from([3, 4]));
   });
 
   it("4 char has null at end", () => {

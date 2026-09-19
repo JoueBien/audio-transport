@@ -17,6 +17,7 @@ export { decodeAndPopFloat } from "./utils/decoders/decodeAndPopFloat";
 export { decodeAndPopPaddedString } from "./utils/decoders/decodeAndPopPaddedString";
 export { decodeAndPopTerminatedString } from "./utils/decoders/decodeAndPopTerminatedString";
 export { decodeAndPopBytes } from "./utils/decoders/decodeAndPopBytes";
+export { decodeAndPopTerminatedBytes } from "./utils/decoders/decodeAndPopTerminatedBytes";
 
 // Inits
 export { decodeAndPopInit } from "./utils/decoders/intSigned/decodeAndPopInit";
