@@ -1,3 +1,6 @@
+import { afterEach, beforeEach } from "node:test";
+import { vi } from "vitest";
+
 type FakeMethod =
   | "setTimeout"
   | "clearTimeout"

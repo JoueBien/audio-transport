@@ -1,3 +1,4 @@
+import { beforeEach, describe, expect, it } from "vitest";
 import { intEncoder, stringEncoder } from "../encoders";
 import { byteToSByte, sByteToByte } from "../SBitsArray/SBitsArray";
 import { decodeAndPopBytes } from "./decodeAndPopBytes";

@@ -1,6 +1,9 @@
 // Transports
-export { UdpTransport, type ListenerCleanUpFunc } from "./UdpTransport";
-export { mockUdpServer, type MockUdpServer } from "./mocks/mockUdpServer";
+export {
+  UdpTransport,
+  type ListenerCleanUpFunc,
+  type UdpTransportParams,
+} from "./UdpTransport";
 
 // Encode Decode
 export {

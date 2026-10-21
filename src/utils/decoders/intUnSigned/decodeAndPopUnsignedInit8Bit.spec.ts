@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { intEncoder, unsignedIntEncoder, stringEncoder } from "../../encoders";
 import { decodeAndPopChars } from "./../decodeAndPopChars";
 import { decodeAndPopUnsignedInit } from "./decodeAndPopUnsignedInit";

@@ -47,9 +47,10 @@ function sByteToBits(input: SByte) {
 }
 
 /** An array like class that represents a series of bits. */
-// @ts-ignore: we are ignoreing the from overide function not mathcing the def. We don't want the any.
+// @ts-ignore: we are ignoring the from override function not matching the def. We don't want the any.
 export class SBitsArray extends Array<SBit> {
-  length: number = 0;
+  declare length: number;
+
   [n: number]: SBit;
 
   constructor(
@@ -113,7 +114,7 @@ export class SBitsArray extends Array<SBit> {
   }
 
   /** Produce a SBitsArray from other array types or an SByte string. */
-  public static from(input?: SByte | SWord | Uint8Array): SBitsArray {
+  public static override from(input?: SByte | SWord | Uint8Array): SBitsArray {
     if (typeof input === "string") {
       return sByteToBits(input);
     }

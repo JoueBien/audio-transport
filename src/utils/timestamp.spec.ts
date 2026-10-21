@@ -1,11 +1,12 @@
+import { describe, expect, it, vi } from "vitest";
 import { delay } from "./delay";
-import { setUpFakeTimers } from "./testing/setUpFakeTimers";
 import { timestamp } from "./timestamp";
+import { setupFakeTimers } from "../testing/_setupFakeTimers";
 
 const NOW = new Date();
 
 describe("timestamp", () => {
-  setUpFakeTimers({
+  setupFakeTimers({
     now: NOW,
     fake: ["fake", "Date", "performance"],
   });

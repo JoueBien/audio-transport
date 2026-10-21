@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { floatEncoder } from "../encoders";
 import { decodeAndPopFloat } from "./decodeAndPopFloat";
 

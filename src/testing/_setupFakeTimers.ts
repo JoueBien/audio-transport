@@ -1,0 +1,51 @@
+import { vi, afterEach, beforeEach } from "vitest";
+
+export type FakeMethod =
+  | "setTimeout"
+  | "clearTimeout"
+  | "setImmediate"
+  | "clearImmediate"
+  | "setInterval"
+  | "clearInterval"
+  | "Date"
+  | "nextTick"
+  | "hrtime"
+  | "requestAnimationFrame"
+  | "cancelAnimationFrame"
+  | "requestIdleCallback"
+  | "cancelIdleCallback"
+  | "performance"
+  | "queueMicrotask";
+
+export const NOW = new Date(1789196822993);
+
+export function setupFakeTimers(params?: {
+  now?: Date;
+  fake?: ["fake", FakeMethod, ...FakeMethod[]];
+}) {
+  const { now, fake = ["fake", "Date"] } = params || {};
+
+  const [_, ...toFake] = fake;
+
+  beforeEach(() => {
+    vi.useFakeTimers({
+      now: now || NOW,
+      toFake: toFake,
+      shouldAdvanceTime: false,
+    });
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  vi.advanceTimersByTime;
+  return {
+    setSystemTime: vi.setSystemTime,
+    advanceTimersByTime: vi.advanceTimersByTime,
+    advanceTimersByTimeAsync: vi.advanceTimersByTimeAsync,
+    runOnlyPendingTimers: vi.runOnlyPendingTimers,
+    runOnlyPendingTimersAsync: vi.runOnlyPendingTimersAsync,
+    now: vi.getMockedSystemTime() || new Date(),
+  };
+}

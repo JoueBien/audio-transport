@@ -1,7 +1,12 @@
 {
   "name": "@joue-bien/audio-transport",
   "version": "2.0.1",
-  "main": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./types": "./src/index.types.ts",
+    "./testing/vitest": "./src/index.testing-vest.ts",
+    "./utils": "./src/index.utils.ts"
+  },
   "scripts": {
     "test": "vitest --coverage --run",
     "test:watch": "vitest --coverage",
@@ -27,7 +32,8 @@
     "vitest": "4.0.17"
   },
   "peerDependencies": {
-    "typescript": ">=5 <8"
+    "typescript": ">=5 <8",
+    "vitest": ">=4.0.17 <6"
   },
   "bugs": {
     "url": "https://github.com/JoueBien/audio-transport/issues"
@@ -35,5 +41,20 @@
   "homepage": "https://github.com/JoueBien/audio-transport#readme",
   "engines": {
     "node": ">=24"
-  }
+  },
+  "keywords": [
+    "audio",
+    "sound",
+    "control",
+    "udp",
+    "transport",
+    "MIDI",
+    "midi",
+    "OSC",
+    "osc",
+    "open sound control",
+    "Open Sound control",
+    "clock",
+    "typescript"
+  ]
 }

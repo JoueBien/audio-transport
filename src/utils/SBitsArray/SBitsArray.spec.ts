@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { SBitsArray } from "./SBitsArray";
 
 describe("SBitsArray", () => {

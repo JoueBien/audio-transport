@@ -4,6 +4,24 @@ import { delay } from "./utils/delay";
 
 export type ListenerCleanUpFunc = () => void;
 
+export type UdpTransportParams = {
+  /** Remote port to send messages to. */
+  remotePort?: number;
+  /**
+   * Remote IP address to send messages to.
+   * @default `"localhost"`
+   */
+  remoteAddress?: string;
+  /**
+   * The port to listen for remote messages on.
+   * This is normally the port the remote OSC server to replies to.
+   */
+  responsePort: number;
+
+  /** An external abort controller. Useful if you need to tie multiple instances to the same abort. */
+  cleanUpController?: AbortController;
+};
+
 /**
  * A class that looks after connecting to a UDP server or listening as a server.
  */
@@ -18,23 +36,7 @@ export class UdpTransport {
 
   cleanUpController: AbortController;
 
-  constructor(params: {
-    /** Remote port to send messages to. */
-    remotePort?: number;
-    /**
-     * Remote IP address to send messages to.
-     * @default `"localhost"`
-     */
-    remoteAddress?: string;
-    /**
-     * The port to listen for remote messages on.
-     * This is normally the port the remote OSC server to replies to.
-     */
-    responsePort: number;
-
-    /** An external abort controller. Useful if you need to tie multiple instances to the same abort. */
-    cleanUpController?: AbortController;
-  }) {
+  constructor(params: UdpTransportParams) {
     // Set Local State
     this.remoteAddress = params.remoteAddress || "localhost";
     this.remotePort = params.remotePort || 1005;
@@ -321,5 +323,9 @@ export class UdpTransport {
       this.client.off("error", errorWrapper);
     };
     return cleanUp;
+  }
+
+  deconstructor() {
+    this.cleanUpController.abort();
   }
 }

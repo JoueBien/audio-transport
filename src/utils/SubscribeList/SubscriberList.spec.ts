@@ -1,3 +1,4 @@
+import { describe, expect, it, vi } from "vitest";
 import { getSubscriberId } from "./getSubscriberId";
 import { SubscriberList } from "./SubscriberList";
 

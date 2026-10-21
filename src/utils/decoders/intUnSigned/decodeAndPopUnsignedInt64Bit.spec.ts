@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { unsignedIntEncoder } from "../../encoders";
 import { timestamp } from "../../timestamp";
 import { decodeAndPopUnsignedInt64Bit } from "./decodeAndPopUnsignedInt64Bit";
