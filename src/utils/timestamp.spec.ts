@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { delay } from "./delay";
 import { timestamp } from "./timestamp";
-import { setupFakeTimers } from "../testing/_setupFakeTimers";
+import { setupFakeTimers } from "../testing/setupFakeTimers";
 
 const NOW = new Date();
 

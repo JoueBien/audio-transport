@@ -3,7 +3,6 @@ export {
   setupFakeTimers,
   NOW,
   type FakeMethod,
-} from "./testing/_setupFakeTimers";
-
+} from "./testing/setupFakeTimers";
 export { setupClient } from "./testing/setupClient";
 export { setupServer } from "./testing/setupServer";
