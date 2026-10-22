@@ -1,2 +1,2 @@
-export { type ExactlyOneKeyValuePair } from "./types/ExactlyOneKeyValuePair";
-export { type RecursivePartial } from "./types/RecursivePartial";
+export { type ExactlyOneKeyValuePair } from "./types/ExactlyOneKeyValuePair.ts";
+export { type RecursivePartial } from "./types/RecursivePartial.ts";

@@ -1,4 +1,4 @@
-import { UdpTransport, UdpTransportParams } from "../UdpTransport";
+import { UdpTransport, type UdpTransportParams } from "../UdpTransport.ts";
 import { beforeEach, afterEach, vi } from "vitest";
 
 export function setupClient(params?: Partial<UdpTransportParams>) {

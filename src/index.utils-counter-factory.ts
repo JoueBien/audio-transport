@@ -1,1 +1,1 @@
-export { counterFactory } from "./utils/counterFactory";
+export { counterFactory } from "./utils/counterFactory.ts";

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { delay } from "./delay";
+import { delay } from "./delay.ts";
 
 describe("delay", () => {
   it("it delays when ms is specified", async () => {

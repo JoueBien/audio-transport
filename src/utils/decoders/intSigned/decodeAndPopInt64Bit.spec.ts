@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { intEncoder } from "../../encoders";
-import { timestamp } from "../../timestamp";
-import { decodeAndPopInt64Bit } from "./decodeAndPopInt64Bit";
+import { intEncoder } from "../../encoders/index.ts";
+import { timestamp } from "../../timestamp.ts";
+import { decodeAndPopInt64Bit } from "./decodeAndPopInt64Bit.ts";
 
 describe("decodeAndPopInit", () => {
   it("handles 100 and 101 in same buffer", () => {

@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { intEncoder, stringEncoder } from "../encoders";
-import { decodeAndPopChars } from "./decodeAndPopChars";
-import { decodeAndPopInit } from "./intSigned/decodeAndPopInit";
-import { decodeAndPopInit8Bit } from "./intSigned/decodeAndPopInit8Bit";
+import { intEncoder, stringEncoder } from "../encoders/index.ts";
+import { decodeAndPopChars } from "./decodeAndPopChars.ts";
+import { decodeAndPopInit } from "./intSigned/decodeAndPopInit.ts";
+import { decodeAndPopInit8Bit } from "./intSigned/decodeAndPopInit8Bit.ts";
 
 describe("decodeAndPopChars", () => {
   it("encodes and decodes", () => {

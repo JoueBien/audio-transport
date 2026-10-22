@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { intEncoder, stringEncoder } from "../encoders";
-import { byteToSByte, sByteToByte } from "../SBitsArray/SBitsArray";
-import { decodeAndPopBytes } from "./decodeAndPopBytes";
-import { decodeAndPopChars } from "./decodeAndPopChars";
-import { decodeAndPopInit8Bit } from "./intSigned/decodeAndPopInit8Bit";
+import { intEncoder, stringEncoder } from "../encoders/index.ts";
+import { byteToSByte, sByteToByte } from "../SBitsArray/SBitsArray.ts";
+import { decodeAndPopBytes } from "./decodeAndPopBytes.ts";
+import { decodeAndPopChars } from "./decodeAndPopChars.ts";
+import { decodeAndPopInit8Bit } from "./intSigned/decodeAndPopInit8Bit.ts";
 
 describe("decodeAndPopBytes", () => {
   it("encodes and decodes", () => {

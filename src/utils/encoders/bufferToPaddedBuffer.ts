@@ -1,5 +1,5 @@
-import { unsignedIntEncoder } from ".";
-import { textEncoder } from "./stringToPaddedBuffer";
+import { unsignedIntEncoder } from "./index.ts";
+import { textEncoder } from "./stringToPaddedBuffer.ts";
 
 const BUFFER_PADDING = {
   0: Buffer.from(""),

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { intEncoder } from "../../encoders";
-import { decodeAndPopInit } from "./decodeAndPopInit";
+import { intEncoder } from "../../encoders/index.ts";
+import { decodeAndPopInit } from "./decodeAndPopInit.ts";
 
 describe("decodeAndPopInit", () => {
   it("handles 100", () => {

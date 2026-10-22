@@ -1,4 +1,4 @@
-import { decodeAndPopUnsignedInit } from "./intUnSigned/decodeAndPopUnsignedInit";
+import { decodeAndPopUnsignedInit } from "./intUnSigned/decodeAndPopUnsignedInit.ts";
 
 /**
  * Blobs are encoded as follows:

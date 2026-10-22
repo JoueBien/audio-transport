@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { getSubscriberId } from "./getSubscriberId";
+import { getSubscriberId } from "./getSubscriberId.ts";
 
 describe("getSubscriberId", () => {
   it("encodes an id", () => {

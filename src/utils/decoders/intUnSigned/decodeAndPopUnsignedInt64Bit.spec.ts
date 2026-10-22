@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
-import { unsignedIntEncoder } from "../../encoders";
-import { timestamp } from "../../timestamp";
-import { decodeAndPopUnsignedInt64Bit } from "./decodeAndPopUnsignedInt64Bit";
+import { timestamp } from "../../timestamp.ts";
+import { decodeAndPopUnsignedInt64Bit } from "./decodeAndPopUnsignedInt64Bit.ts";
+import { unsignedIntEncoder } from "../../encoders/index.ts";
 
 describe("decodeAndPopInit", () => {
   it("handles max and 101 in same buffer", () => {

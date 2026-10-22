@@ -1,12 +1,11 @@
 import { Failure } from "fail-up";
-import { UdpTransport } from "./UdpTransport";
-import { decodeAndPopPaddedString } from "./utils/decoders/decodeAndPopPaddedString";
-import { stringEncoder } from "./utils/encoders";
-import { describe, it } from "vitest";
-import { setupClient } from "./testing/setupClient";
-import { setupServer } from "./testing/setupServer";
-import { expect } from "vitest";
-import { sendAndWaitFor } from "./index.utils-async";
+import { UdpTransport } from "./UdpTransport.ts";
+import { decodeAndPopPaddedString } from "./utils/decoders/decodeAndPopPaddedString.ts";
+import { stringEncoder } from "./utils/encoders/index.ts";
+import { describe, it, expect } from "vitest";
+import { setupClient } from "./testing/setupClient.ts";
+import { setupServer } from "./testing/setupServer.ts";
+import { sendAndWaitFor } from "./index.utils-async.ts";
 import dgram from "dgram";
 
 describe("UdpTransport", () => {

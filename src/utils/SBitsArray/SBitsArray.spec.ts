@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { SBitsArray } from "./SBitsArray";
+import { SBitsArray } from "./SBitsArray.ts";
 
 describe("SBitsArray", () => {
   it("the constructor creates empty array-like", () => {

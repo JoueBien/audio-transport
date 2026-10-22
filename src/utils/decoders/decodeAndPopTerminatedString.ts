@@ -1,4 +1,4 @@
-import { textDecoder } from "../encoders/stringToPaddedBuffer";
+import { textDecoder } from "../encoders/stringToPaddedBuffer.ts";
 
 export function decodeAndPopTerminatedString(
   unit8Array: Uint8Array<ArrayBuffer>,

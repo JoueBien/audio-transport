@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { counterFactory } from "./counterFactory";
+import { counterFactory } from "./counterFactory.ts";
 
 const randomSpy = vi.spyOn(Math, "random");
 

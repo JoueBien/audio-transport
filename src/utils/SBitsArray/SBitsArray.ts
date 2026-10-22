@@ -2,10 +2,10 @@ import * as util from "node:util";
 import {
   LOOK_UP_BYTE_TO_SBYTE,
   LOOK_UP_S_BYTE_TO_BYTE,
-  SBit,
-  SByte,
-  SWord,
-} from "./bitMaps";
+  type SBit,
+  type SByte,
+  type SWord,
+} from "./bitMaps.ts";
 
 /**
  * Convert a string representation of binary to a byte.

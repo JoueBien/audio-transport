@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
-import { getSubscriberId } from "./getSubscriberId";
-import { SubscriberList } from "./SubscriberList";
+import { getSubscriberId } from "./getSubscriberId.ts";
+import { SubscriberList } from "./SubscriberList.ts";
 
 describe("SubscriberList", () => {
   it("starts up and shutdowns", () => {

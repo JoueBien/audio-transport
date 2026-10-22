@@ -1,7 +1,7 @@
 import {
   calcStringBufferPadding,
   textDecoder,
-} from "../encoders/stringToPaddedBuffer";
+} from "../encoders/stringToPaddedBuffer.ts";
 
 export function decodeAndPopPaddedString(unit8Array: Uint8Array<ArrayBuffer>) {
   const strEndsAt = unit8Array.indexOf(0);

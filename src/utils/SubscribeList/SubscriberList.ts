@@ -1,11 +1,11 @@
-import { getSubscriberId } from "./getSubscriberId";
-import { nowPlusMS } from "./timeUtils";
+import { getSubscriberId } from "./getSubscriberId.ts";
+import { nowPlusMS } from "./timeUtils.ts";
 import {
-  Subscriber,
-  SubscriberAndExpireListner,
-  SubscriberId,
-  Subscribers,
-} from "./types";
+  type Subscriber,
+  type SubscriberAndExpireListner,
+  type SubscriberId,
+  type Subscribers,
+} from "./types.ts";
 
 /**
  * A class that is used to keep track of what clients are subscribed to.

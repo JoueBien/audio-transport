@@ -1,8 +1,8 @@
-import { bufferToPaddedBuffer } from "./bufferToPaddedBuffer";
-import { stringToPaddedBuffer, textEncoder } from "./stringToPaddedBuffer";
+import { bufferToPaddedBuffer } from "./bufferToPaddedBuffer.ts";
+import { stringToPaddedBuffer, textEncoder } from "./stringToPaddedBuffer.ts";
 
-export { intEncoder } from "./intSigned";
-export { unsignedIntEncoder } from "./intUnsigned";
+export { intEncoder } from "./intSigned.ts";
+export { unsignedIntEncoder } from "./intUnsigned.ts";
 
 export const floatEncoder = {
   encode: function encode(number: number) {

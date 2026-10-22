@@ -3,6 +3,6 @@ export {
   setupFakeTimers,
   NOW,
   type FakeMethod,
-} from "./testing/setupFakeTimers";
-export { setupClient } from "./testing/setupClient";
-export { setupServer } from "./testing/setupServer";
+} from "./testing/setupFakeTimers.ts";
+export { setupClient } from "./testing/setupClient.ts";
+export { setupServer } from "./testing/setupServer.ts";

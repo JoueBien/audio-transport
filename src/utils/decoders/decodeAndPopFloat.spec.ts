@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { floatEncoder } from "../encoders";
-import { decodeAndPopFloat } from "./decodeAndPopFloat";
+import { floatEncoder } from "../encoders/index.ts";
+import { decodeAndPopFloat } from "./decodeAndPopFloat.ts";
 
 describe("decodeAndPopFloat", () => {
   it("handles 100.11", () => {

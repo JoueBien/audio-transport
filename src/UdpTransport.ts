@@ -1,6 +1,6 @@
 import dgram from "dgram";
 import { type Result, Failure } from "fail-up";
-import { delay } from "./utils/delay";
+import { delay } from "./utils/delay.ts";
 
 export type ListenerCleanUpFunc = () => void;
 

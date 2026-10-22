@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { decodeAndPopTerminatedBytes } from "./decodeAndPopTerminatedBytes";
+import { decodeAndPopTerminatedBytes } from "./decodeAndPopTerminatedBytes.ts";
 
 describe("decodeAndPopTerminatedBytes", () => {
   it("pops the default terminator of 0", () => {

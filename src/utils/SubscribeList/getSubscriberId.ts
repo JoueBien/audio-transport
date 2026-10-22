@@ -1,4 +1,8 @@
-import { Subscriber, SubscriberAndExpireListner, SubscriberId } from "./types";
+import {
+  type Subscriber,
+  type SubscriberAndExpireListner,
+  type SubscriberId,
+} from "./types.ts";
 
 /** Get a look up key for an item in the SubscriberList */
 export function getSubscriberId(

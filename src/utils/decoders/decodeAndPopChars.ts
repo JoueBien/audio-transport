@@ -1,8 +1,8 @@
-import { textDecoder } from "../encoders/stringToPaddedBuffer";
+import { textDecoder } from "../encoders/stringToPaddedBuffer.ts";
 
 export function decodeAndPopChars(
   unit8Buf: Uint8Array<ArrayBuffer>,
-  noOfChars: number
+  noOfChars: number,
 ) {
   const strBuffer = unit8Buf.slice(0, noOfChars);
   const str = textDecoder.write(strBuffer);

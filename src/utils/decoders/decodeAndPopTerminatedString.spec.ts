@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { intEncoder, stringEncoder } from "../encoders";
-import { decodeAndPopTerminatedString } from "./decodeAndPopTerminatedString";
+import { intEncoder, stringEncoder } from "../encoders/index.ts";
+import { decodeAndPopTerminatedString } from "./decodeAndPopTerminatedString.ts";
 
 describe("decodeAndPopTerminatedString", () => {
   it("it decodes strings", () => {

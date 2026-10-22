@@ -1,6 +1,7 @@
 {
   "name": "@joue-bien/audio-transport",
   "version": "3.0.0",
+  "type": "module",
   "exports": {
     ".": "./src/index.ts",
     "./types": "./src/index.types.ts",
@@ -24,19 +25,20 @@
   },
   "license": "MIT NON-AI",
   "dependencies": {
-    "fail-up": "2.0.0"
+    "fail-up": "2.0.2"
   },
   "devDependencies": {
     "@types/node": "22.13.5",
-    "@vitest/coverage-v8": "4.0.17",
+    "@vitest/coverage-v8": "5.0.5",
     "eslint": "9.39.2",
     "prettier": "3.8.0",
     "typescript": "^7.0.2",
-    "vitest": "4.0.17"
+    "vitest": "5.0.5"
   },
   "peerDependencies": {
     "typescript": ">=5 <8",
-    "vitest": ">=4.0.17 <6"
+    "vitest": ">=4.0.17 <6",
+    "@vitest/coverage-v8": ">=4.0.17 <6"
   },
   "bugs": {
     "url": "https://github.com/JoueBien/audio-transport/issues"

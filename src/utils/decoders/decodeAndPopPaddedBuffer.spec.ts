@@ -1,13 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { bufferEncoder, floatEncoder, intEncoder } from "../encoders";
+import { bufferEncoder, floatEncoder, intEncoder } from "../encoders/index.ts";
 import {
   stringToPaddedBuffer,
   textEncoder,
-} from "../encoders/stringToPaddedBuffer";
-import { decodeAndPopPaddedBuffer } from "./decodeAndPopPaddedBuffer";
-import { decodeAndPopFloat } from "./decodeAndPopFloat";
-import { decodeAndPopPaddedString } from "./decodeAndPopPaddedString";
-import { decodeAndPopInit } from "./intSigned/decodeAndPopInit";
+} from "../encoders/stringToPaddedBuffer.ts";
+import { decodeAndPopPaddedBuffer } from "./decodeAndPopPaddedBuffer.ts";
+import { decodeAndPopFloat } from "./decodeAndPopFloat.ts";
+import { decodeAndPopPaddedString } from "./decodeAndPopPaddedString.ts";
+import { decodeAndPopInit } from "./intSigned/decodeAndPopInit.ts";
 
 describe("decodeAndPopBlob", () => {
   it("encodes and decodes", () => {

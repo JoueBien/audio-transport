@@ -1,3 +1,3 @@
-export { doInOrder } from "./utils/async/doInOrder";
-export { sendAndWaitFor } from "./utils/async/sendAndWaitFor";
-export { delay } from "./utils/delay";
+export { doInOrder } from "./utils/async/doInOrder.ts";
+export { sendAndWaitFor } from "./utils/async/sendAndWaitFor.ts";
+export { delay } from "./utils/delay.ts";
