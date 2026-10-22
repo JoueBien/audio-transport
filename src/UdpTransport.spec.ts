@@ -6,7 +6,7 @@ import { describe, it } from "vitest";
 import { setupClient } from "./testing/setupClient";
 import { setupServer } from "./testing/setupServer";
 import { expect } from "vitest";
-import { sendAndWaitFor } from "./index.utils";
+import { sendAndWaitFor } from "./index.utils-async";
 import dgram from "dgram";
 
 describe("UdpTransport", () => {

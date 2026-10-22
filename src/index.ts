@@ -34,18 +34,5 @@ export { decodeAndPopUnsignedInit16Bit } from "./utils/decoders/intUnSigned/deco
 export { decodeAndPopUnsignedInit8Bit } from "./utils/decoders/intUnSigned/decodeAndPopUnsignedInit8Bit";
 export { decodeAndPopUnsignedInt64Bit } from "./utils/decoders/intUnSigned/decodeAndPopUnsignedInt64Bit";
 
-// Bits Array
-export { SBitsArray } from "./utils/SBitsArray/SBitsArray";
-export { type SBit, type SByte, type SWord } from "./utils/SBitsArray/bitMaps";
-
-// SubscribeList
-export * from "./utils/SubscribeList/types";
-export * from "./utils/SubscribeList/timeUtils";
-export { getSubscriberId } from "./utils/SubscribeList/getSubscriberId";
-export { SubscriberList } from "./utils/SubscribeList/SubscriberList";
-
-// General other Utils
-export { delay } from "./utils/delay";
+// Timestamps
 export { timestamp } from "./utils/timestamp";
-export { EventEmitterController } from "./utils/EventEmitterController";
-export { counterFactory } from "./utils/counterFactory";

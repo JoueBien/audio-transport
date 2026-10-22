@@ -1,11 +1,14 @@
 {
   "name": "@joue-bien/audio-transport",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "exports": {
     ".": "./src/index.ts",
     "./types": "./src/index.types.ts",
     "./testing/vitest": "./src/index.testing-vest.ts",
-    "./utils": "./src/index.utils.ts"
+    "./utils/async": "./src/index.utils-async.ts",
+    "./utils/counter-factory": "./src/index.utils-counter-factory.ts",
+    "./utils/sbit-array": "./src/index.utils-sbit-array.ts",
+    "./utils/subscriber-list": "./src/index.utils-subscriber-list.ts"
   },
   "scripts": {
     "test": "vitest --coverage --run",
