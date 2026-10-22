@@ -30,5 +30,6 @@ export function setupClient(params?: Partial<UdpTransportParams>) {
   return {
     /** Get the current client that has been set up. */
     getCurrentClient,
+    clientOnSpy,
   };
 }

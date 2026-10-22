@@ -29,5 +29,6 @@ export function setupServer(params?: Partial<UdpTransportParams>) {
   return {
     /** Get the current server that has been set up. */
     getCurrentServer,
+    serverOnSpy,
   };
 }
